@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrefour - Application de bien-être</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0937A0;
+            color: #fff;
+            padding: 10px;
+            position: relative;
+        }
+        .top-bar form {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .top-bar input {
+            margin-right: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+        .top-bar .info-icon {
+            font-size: 20px;
+            cursor: pointer;
+            background: #fff;
+            color: #0937A0;
+            border-radius: 50%;
+            border: 1px solid #0937A0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .top-bar .dark-mode-button {
+            font-size: 20px;
+            cursor: pointer;
+            background: #fff;
+            color: #0937A0;
+            border-radius: 50%;
+            border: 1px solid #0937A0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px; /* Espacement avant les boutons de connexion/inscription */
+        }
+        .top-bar button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            margin-left: 5px; /* Espacement entre les boutons */
+        }
+        .top-bar .info-tooltip {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #000;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        .top-bar .beta-button {
+            cursor: pointer;
+            background-color: #ff5733;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .top-bar .beta-button:hover {
+            background-color: #c70039;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .menu-bar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            align-items: center;
+        }
+        .menu-bar img {
+            height: 80px;
+        }
+        .menu-bar select {
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .title-oval {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #0937A0;
+            color: #FFFF;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: -40px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            flex: 1;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            background-color: #007bff;
+            color: #fff;
+        }
+        button i {
+            margin-right: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .dark-mode button {
+            background-color: #007bff;
+        }
+        .dark-mode button:hover {
+            background-color: #0056b3;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+        .dark-mode .card {
+            background: #444;
+        }
+        .footer {
+            background-color: rgba(0, 123, 255, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        /* Chatbot styles */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .chatbot-window {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+        }
+        .chatbot-window header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-window .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .chatbot-window .input {
+            display: flex;
+            padding: 10px;
+        }
+        .chatbot-window .input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .chatbot-window .input button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+            color: #888;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+            }
+            .top-bar .info-icon, .top-bar .dark-mode-button {
+                margin-right: 0; /* Ajustez pour les petits écrans */
+            }
+            .top-bar .beta-button {
+                display: none; /* Masquer le bouton bêta sur mobile si nécessaire */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <form id="login-form">
+            <input type="text" placeholder="Identifiant" required>
+            <input type="password" placeholder="Mot de passe" required>
+            <button type="submit">Connexion</button>
+            <button type="button" onclick="register()">Inscription</button>
+            <button type="button" class="dark-mode-button" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <button type="button" class="beta-button" onclick="showBetaInfo()">Télécharger la version mobile</button>
+        </form>
+    </div>
+    <header>
+        <div class="menu-bar">
+            <img src="logo.png" alt="Logo">
+            <select id="language" onchange="changeLanguage()">
+                <option value="fr">Français</option>
+                <option value="pt">Portugais</option>
+            </select>
+        </div>
+        <div class="title-oval">Care'Four</div>
+        </p><i>Votre application de bien-être</i></p>
+    </header>
+    <div class="container">
+        <!-- Suivi de la Santé et du Bien-Être -->
+        <div class="section card">
+            <h2 id="health-tracking-title">Suivi de la Santé et du Bien-Être</h2>
+            <p id="health-tracking-description">Suivez votre activité physique, votre sommeil, et vos habitudes alimentaires.</p>
+            <button onclick="showHealthTracking()">Afficher les données</button>
+            <p id="health-tracking-info"></p>
+        </div>
+        <!-- Programmes de Bien-Être -->
+        <div class="section card">
+            <h2 id="wellness-programs-title">Programmes de Bien-Être</h2>
+            <p id="wellness-programs-description">Accédez à des programmes pour gérer le stress, faire du fitness et plus encore.</p>
+            <button onclick="showWellnessPrograms()">Afficher les programmes</button>
+            <p id="wellness-programs-info"></p>
+        </div>
+        <!-- Éducation et Ressources -->
+        <div class="section card">
+            <h2 id="education-resources-title">Éducation et Ressources</h2>
+            <p id="education-resources-description">Articles, vidéos et ressources pour votre bien-être.</p>
+            <button onclick="showEducationResources()">Afficher les ressources</button>
+            <p id="education-resources-info"></p>
+        </div>
+        <!-- Outils de Gestion du Stress -->
+        <div class="section card">
+            <h2 id="stress-management-tools-title">Outils de Gestion du Stress</h2>
+            <p id="stress-management-tools-description">Exercices de respiration, méditation et autres outils pour gérer le stress.</p>
+            <button onclick="showStressManagementTools()">Afficher les outils</button>
+            <p id="stress-management-tools-info"></p>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 - Nazookh NUJURALLY / Lola PETITJEAN / Flavien CEDE / Valentin CALVO. </p><a href="#">Politique de Confidentialité</a> | <a href="#">Conditions d'Utilisation</a>
+    </div>
+    <div class="chatbot" onclick="toggleChatbot()">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-window">
+        <header>
+            <span>Chatbot</span>
+            <button onclick="toggleChatbot()">X</button>
+        </header>
+        <div class="messages" id="messages"></div>
+        <div class="typing-indicator" id="typingIndicator">Le chatbot est en train d'écrire...</div>
+        <div class="input">
+            <input type="text" id="chatInput" placeholder="Posez une question...">
+            <button onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+    <script>
+        function toggleChatbot() {
+            const chatbotWindow = document.querySelector('.chatbot-window');
+            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const messages = document.getElementById('messages');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            if (chatInput.value.trim() === '') return;
+
+            const userMessage = document.createElement('div');
+            userMessage.textContent = chatInput.value;
+            userMessage.style.textAlign = 'right';
+            userMessage.style.margin = '10px 0';
+            messages.appendChild(userMessage);
+
+            const userText = chatInput.value.trim().toLowerCase();
+            chatInput.value = '';
+            typingIndicator.style.display = 'block';
+
+            const responses = {
+                'bonjour': 'Bonjour ! Comment puis-je vous aider aujourd\'hui ?',
+                'stress': 'Pour gérer le stress, essayez la méditation ou des exercices de respiration.',
+                'programme': 'Nous avons divers programmes de bien-être disponibles dans la section dédiée.',
+                'sommeil': 'Un bon sommeil est crucial pour le bien-être. Avez-vous des problèmes de sommeil ?'
+            };
+
+            setTimeout(() => {
+                const chatbotResponse = document.createElement('div');
+                chatbotResponse.style.textAlign = 'left';
+                chatbotResponse.style.margin = '10px 0';
+                chatbotResponse.textContent = responses[userText] || 'Je suis désolé, je ne comprends pas votre demande.';
+                typingIndicator.style.display = 'none';
+                messages.appendChild(chatbotResponse);
+
+                // Auto-scroll to the latest message
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+        }
+
+        function toggleInfoTooltip() {
+            const infoTooltip = document.getElementById('infoTooltip');
+            infoTooltip.style.display = infoTooltip.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showBetaInfo() {
+            alert("Cette version est en bêta. Merci de votre patience et de vos retours !");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function changeLanguage() {
+            const language = document.getElementById('language').value;
+            alert("Langue changée en : " + (language === 'fr' ? 'Français' : 'Portugais'));
+        }
+
+        function register() {
+            alert("Page d'inscription à implémenter.");
+        }
+
+        function showHealthTracking() {
+            document.getElementById('health-tracking-info').textContent = "Données de santé affichées.";
+        }
+
+        function showWellnessPrograms() {
+            document.getElementById('wellness-programs-info').textContent = "Programmes de bien-être affichés.";
+        }
+
+        function showEducationResources() {
+            document.getElementById('education-resources-info').textContent = "Ressources éducatives affichées.";
+        }
+
+        function showStressManagementTools() {
+            document.getElementById('stress-management-tools-info').textContent = "Outils de gestion du stress affichés.";
+        }
+    </script>
+</body>
+</html>
