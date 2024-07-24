@@ -606,7 +606,6 @@
             <a href="#" id="carousel-link">En savoir plus</a>
         </div>
         <div class="carousel-nav">
-            <button class="nav-btn" data-index="0"></button>
             <button class="nav-btn" data-index="1"></button>
             <button class="nav-btn" data-index="2"></button>
             <button class="nav-btn" data-index="3"></button>
@@ -856,10 +855,9 @@ const slide = document.querySelector('.carousel-slide');
         const carouselLink = document.getElementById('carousel-link');
 
         const links = [
-            { url: 'lien1.html', text: 'En savoir plus' },
-            { url: 'lien2.html', text: 'En savoir plus' },
-            { url: 'lien3.html', text: 'En savoir plus' },
-            { url: 'lien4.html', text: 'En savoir plus' }
+            { url: '#', text: 'En savoir plus' },
+            { url: '#', text: 'En savoir plus' },
+            { url: '#', text: 'En savoir plus' }
         ];
 
         let counter = 0;
