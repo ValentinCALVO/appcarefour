@@ -11,10 +11,15 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            color: #000;
             transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #f4f4f4;
         }
         .top-bar {
             display: flex;
@@ -49,41 +54,6 @@
             width: 30px;
             height: 30px;
             margin-right: 10px;
-        }
-        .top-bar .dark-mode-button {
-            font-size: 20px;
-            cursor: pointer;
-            background: #fff;
-            color: #0937A0;
-            border-radius: 50%;
-            border: 1px solid #0937A0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px; /* Espacement avant les boutons de connexion/inscription */
-        }
-        .top-bar button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-            margin-left: 5px; /* Espacement entre les boutons */
-        }
-        .top-bar .info-tooltip {
-            display: none;
-            position: absolute;
-            top: 40px;
-            right: 0;
-            background: #000;
-            color: #fff;
-            padding: 5px;
-            border-radius: 4px;
-            font-size: 14px;
-            z-index: 1000;
         }
         .top-bar .beta-button {
             cursor: pointer;
@@ -130,7 +100,11 @@
             color: #FFFF;
             font-weight: bold;
             font-size: 24px;
-            margin-top: -40px;
+            margin-top: 10px;
+            position: absolute;
+            top: 50%;
+            left: 45%;
+            transform: translate(-50%, -50%);
         }
         .container {
             width: 100%;
@@ -146,6 +120,9 @@
             margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        body.dark-mode .card {
+            background: #1e1e1e;
         }
         button {
             padding: 10px 20px;
@@ -163,19 +140,6 @@
         }
         button:hover {
             background-color: #0056b3;
-        }
-        .dark-mode button {
-            background-color: #007bff;
-        }
-        .dark-mode button:hover {
-            background-color: #0056b3;
-        }
-        .dark-mode {
-            background-color: #333;
-            color: #f4f4f4;
-        }
-        .dark-mode .card {
-            background: #444;
         }
         .footer {
             background-color: rgba(0, 123, 255, 0.9);
@@ -221,6 +185,8 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             display: none;
             flex-direction: column;
+            border: 1px solid #ddd;
+            overflow: hidden;
         }
         .chatbot-window header {
             background-color: #007bff;
@@ -235,17 +201,54 @@
             flex: 1;
             padding: 10px;
             overflow-y: auto;
-            border-bottom: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chatbot-window .message {
+            display: flex;
+            align-items: flex-end;
+            max-width: 80%;
+        }
+        .chatbot-window .message.bot {
+            align-self: flex-start;
+        }
+        .chatbot-window .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .chatbot-window .message img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+        .chatbot-window .message .bubble {
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chatbot-window .message.bot .bubble {
+            background-color: #e1e1e1;
+        }
+        .chatbot-window .message.user .bubble {
+            background-color: #007bff;
+            color: #fff;
         }
         .chatbot-window .input {
             display: flex;
             padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
         }
         .chatbot-window .input input {
             flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 20px;
             margin-right: 10px;
         }
         .chatbot-window .input button {
@@ -253,102 +256,194 @@
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
+            font-size: 14px;
+        }
+        .chatbot-window .input button:hover {
+            background-color: #0056b3;
         }
         .typing-indicator {
             display: none;
             padding: 10px;
             color: #888;
             font-style: italic;
+            font-size: 12px;
         }
         @media (max-width: 768px) {
             .top-bar {
                 flex-direction: column;
             }
-            .top-bar .info-icon, .top-bar .dark-mode-button {
+            .top-bar .info-icon {
                 margin-right: 0; /* Ajustez pour les petits écrans */
             }
             .top-bar .beta-button {
                 display: none; /* Masquer le bouton bêta sur mobile si nécessaire */
             }
+            .title-oval {
+                font-size: 18px; /* Ajustez la taille du texte pour les petits écrans */
+            }
+        }
+        /* Bouton mode clair/sombre */
+        .dark-mode-toggle {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            padding: 5px 15px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+        .dark-mode-toggle:hover {
+            transform: translateY(-2px);
+        }
+        .dark-mode-toggle i {
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
     <div class="top-bar">
-        <form id="login-form">
-            <input type="text" placeholder="Identifiant" required>
-            <input type="password" placeholder="Mot de passe" required>
-            <button type="submit">Connexion</button>
-            <button type="button" onclick="register()">Inscription</button>
-            <button type="button" class="dark-mode-button" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
-            <button type="button" class="beta-button" onclick="showBetaInfo()">Télécharger la version mobile</button>
+        <form>
+            <input type="text" placeholder="Adresse e-mail" data-key="email_placeholder">
+            <input type="password" placeholder="Mot de passe" data-key="password_placeholder">
+            <span class="info-icon" onclick="showInfo()">i</span>
+            <button type="button" data-key="login_button">Connexion</button>
+            <button type="button" onclick="register()" data-key="register_button">Inscription</button>
+            <button type="button" class="beta-button" onclick="showBetaInfo()" data-key="beta_button">Télécharger la version mobile</button>
         </form>
     </div>
     <header>
         <div class="menu-bar">
             <img src="logo.png" alt="Logo">
-            <select id="language" onchange="changeLanguage()">
-                <option value="fr">Français</option>
-                <option value="pt">Portugais</option>
-            </select>
+            <div>
+                <select id="language" onchange="changeLanguage()">
+                    <option value="fr">Français</option>
+                    <option value="pt">Português</option>
+                </select>
+                <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-sun"></i> Mode clair / sombre
+                </div>
+            </div>
         </div>
-        <div class="title-oval">Care'Four</div>
-        </p><i>Votre application de bien-être</i></p>
+        <div class="title-oval" data-key="title">Care'Four : Votre application bien-être</div>
     </header>
     <div class="container">
         <!-- Suivi de la Santé et du Bien-Être -->
         <div class="section card">
-            <h2 id="health-tracking-title">Suivi de la Santé et du Bien-Être</h2>
-            <p id="health-tracking-description">Suivez votre activité physique, votre sommeil, et vos habitudes alimentaires.</p>
-            <button onclick="showHealthTracking()">Afficher les données</button>
-            <p id="health-tracking-info"></p>
+            <h2 data-key="health_wellness">Suivi de la Santé et du Bien-Être</h2>
+            <p data-key="health_wellness_desc">Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.</p>
         </div>
-        <!-- Programmes de Bien-Être -->
+        <!-- Programmes de Formation -->
         <div class="section card">
-            <h2 id="wellness-programs-title">Programmes de Bien-Être</h2>
-            <p id="wellness-programs-description">Accédez à des programmes pour gérer le stress, faire du fitness et plus encore.</p>
-            <button onclick="showWellnessPrograms()">Afficher les programmes</button>
-            <p id="wellness-programs-info"></p>
+            <h2 data-key="training_programs">Programmes de Formation</h2>
+            <p data-key="training_programs_desc">Accédez à des formations adaptées pour votre développement personnel et professionnel.</p>
         </div>
-        <!-- Éducation et Ressources -->
+        <!-- Suivi de Performance -->
         <div class="section card">
-            <h2 id="education-resources-title">Éducation et Ressources</h2>
-            <p id="education-resources-description">Articles, vidéos et ressources pour votre bien-être.</p>
-            <button onclick="showEducationResources()">Afficher les ressources</button>
-            <p id="education-resources-info"></p>
+            <h2 data-key="performance_tracking">Suivi de Performance</h2>
+            <p data-key="performance_tracking_desc">Évaluez vos performances avec des outils de suivi avancés.</p>
         </div>
-        <!-- Outils de Gestion du Stress -->
+        <!-- Assistance et Support -->
         <div class="section card">
-            <h2 id="stress-management-tools-title">Outils de Gestion du Stress</h2>
-            <p id="stress-management-tools-description">Exercices de respiration, méditation et autres outils pour gérer le stress.</p>
-            <button onclick="showStressManagementTools()">Afficher les outils</button>
-            <p id="stress-management-tools-info"></p>
+            <h2 data-key="support_assistance">Assistance et Support</h2>
+            <p data-key="support_assistance_desc">Obtenez de l'aide rapidement grâce à notre support dédié.</p>
         </div>
     </div>
     <div class="footer">
-        &copy; 2024 - Nazookh NUJURALLY / Lola PETITJEAN / Flavien CEDE / Valentin CALVO. </p><a href="#">Politique de Confidentialité</a> | <a href="#">Conditions d'Utilisation</a>
+        <p>&copy; 2024 Care'Four. Tous droits réservés. <a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>
     </div>
+    <!-- Chatbot -->
     <div class="chatbot" onclick="toggleChatbot()">
         <i class="fas fa-comments"></i>
     </div>
-    <div class="chatbot-window">
+    <div class="chatbot-window" id="chatbotWindow">
         <header>
-            <span>Chatbot</span>
+            <span data-key="chatbot_title">Chatbot</span>
             <button onclick="toggleChatbot()">X</button>
         </header>
         <div class="messages" id="messages"></div>
-        <div class="typing-indicator" id="typingIndicator">Le chatbot est en train d'écrire...</div>
+        <div class="typing-indicator" id="typingIndicator" data-key="typing_indicator">Franck est en train de taper...</div>
         <div class="input">
-            <input type="text" id="chatInput" placeholder="Posez une question...">
-            <button onclick="sendMessage()">Envoyer</button>
+            <input type="text" id="chatInput" placeholder="Tapez un message..." data-key="chat_input_placeholder">
+            <button onclick="sendMessage()" data-key="send_button">Envoyer</button>
         </div>
     </div>
     <script>
+        let currentLanguage = 'fr';
+
+        const translations = {
+            fr: {
+                title: "Care'Four : Votre application bien-être",
+                health_wellness: "Suivi de la Santé et du Bien-Être",
+                health_wellness_desc: "Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.",
+                training_programs: "Programmes de Formation",
+                training_programs_desc: "Accédez à des formations adaptées pour votre développement personnel et professionnel.",
+                performance_tracking: "Suivi de Performance",
+                performance_tracking_desc: "Évaluez vos performances avec des outils de suivi avancés.",
+                support_assistance: "Assistance et Support",
+                support_assistance_desc: "Obtenez de l'aide rapidement grâce à notre support dédié.",
+                email_placeholder: "Adresse e-mail",
+                password_placeholder: "Mot de passe",
+                login_button: "Connexion",
+                register_button: "Inscription",
+                beta_button: "Télécharger la version mobile",
+                chatbot_title: "Chatbot",
+                typing_indicator: "Franck est en train de taper...",
+                chat_input_placeholder: "Tapez un message...",
+                send_button: "Envoyer"
+            },
+            pt: {
+                title: "Care'Four: Seu aplicativo de bem-estar",
+                health_wellness: "Monitoramento de Saúde e Bem-Estar",
+                health_wellness_desc: "Receba conselhos personalizados para melhorar seu bem-estar diário.",
+                training_programs: "Programas de Treinamento",
+                training_programs_desc: "Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.",
+                performance_tracking: "Monitoramento de Desempenho",
+                performance_tracking_desc: "Avalie seu desempenho com ferramentas avançadas de monitoramento.",
+                support_assistance: "Assistência e Suporte",
+                support_assistance_desc: "Obtenha ajuda rapidamente com nosso suporte dedicado.",
+                email_placeholder: "Endereço de email",
+                password_placeholder: "Senha",
+                login_button: "Conexão",
+                register_button: "Inscrição",
+                beta_button: "Baixar versão móvel",
+                chatbot_title: "Chatbot",
+                typing_indicator: "Franck está digitando...",
+                chat_input_placeholder: "Digite uma mensagem...",
+                send_button: "Enviar"
+            }
+        };
+
+        function changeLanguage() {
+            currentLanguage = document.getElementById('language').value;
+            translatePage();
+        }
+
+        function translatePage() {
+            const elementsToTranslate = document.querySelectorAll('[data-key]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.textContent = translations[currentLanguage][key];
+            });
+
+            const placeholdersToTranslate = document.querySelectorAll('input[data-key]');
+            placeholdersToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.setAttribute('placeholder', translations[currentLanguage][key]);
+            });
+        }
+
+        function showBetaInfo() {
+            alert('Version mobile bientôt disponible !');
+        }
+
         function toggleChatbot() {
-            const chatbotWindow = document.querySelector('.chatbot-window');
-            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotWindow.style.display = (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') ? 'flex' : 'none';
         }
 
         function sendMessage() {
@@ -359,9 +454,11 @@
             if (chatInput.value.trim() === '') return;
 
             const userMessage = document.createElement('div');
-            userMessage.textContent = chatInput.value;
-            userMessage.style.textAlign = 'right';
-            userMessage.style.margin = '10px 0';
+            userMessage.className = 'message user';
+            userMessage.innerHTML = `
+                <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Moi">
+                <div class="bubble">${chatInput.value}</div>
+            `;
             messages.appendChild(userMessage);
 
             const userText = chatInput.value.trim().toLowerCase();
@@ -369,17 +466,19 @@
             typingIndicator.style.display = 'block';
 
             const responses = {
-                'bonjour': 'Bonjour ! Comment puis-je vous aider aujourd\'hui ?',
-                'stress': 'Pour gérer le stress, essayez la méditation ou des exercices de respiration.',
-                'programme': 'Nous avons divers programmes de bien-être disponibles dans la section dédiée.',
-                'sommeil': 'Un bon sommeil est crucial pour le bien-être. Avez-vous des problèmes de sommeil ?'
+                'bonjour': translations[currentLanguage]['bonjour'],
+                'aide': translations[currentLanguage]['help'],
+                'merci': translations[currentLanguage]['thanks'],
+                'default': translations[currentLanguage]['default']
             };
 
             setTimeout(() => {
                 const chatbotResponse = document.createElement('div');
-                chatbotResponse.style.textAlign = 'left';
-                chatbotResponse.style.margin = '10px 0';
-                chatbotResponse.textContent = responses[userText] || 'Je suis désolé, je ne comprends pas votre demande.';
+                chatbotResponse.className = 'message bot';
+                chatbotResponse.innerHTML = `
+                    <img src="https://herobot.app/wp-content/uploads/2022/11/AI-bot-1.jpg" alt="Franck">
+                    <div class="bubble">${responses[userText] || responses['default']}</div>
+                `;
                 typingIndicator.style.display = 'none';
                 messages.appendChild(chatbotResponse);
 
@@ -388,43 +487,21 @@
             }, 1000);
         }
 
-        function toggleInfoTooltip() {
-            const infoTooltip = document.getElementById('infoTooltip');
-            infoTooltip.style.display = infoTooltip.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function showBetaInfo() {
-            alert("Cette version est en bêta. Merci de votre patience et de vos retours !");
-        }
-
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
+            const toggleIcon = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleIcon.classList.remove('fa-sun');
+                toggleIcon.classList.add('fa-moon');
+            } else {
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            }
         }
 
-        function changeLanguage() {
-            const language = document.getElementById('language').value;
-            alert("Langue changée en : " + (language === 'fr' ? 'Français' : 'Portugais'));
-        }
-
-        function register() {
-            alert("Page d'inscription à implémenter.");
-        }
-
-        function showHealthTracking() {
-            document.getElementById('health-tracking-info').textContent = "Données de santé affichées.";
-        }
-
-        function showWellnessPrograms() {
-            document.getElementById('wellness-programs-info').textContent = "Programmes de bien-être affichés.";
-        }
-
-        function showEducationResources() {
-            document.getElementById('education-resources-info').textContent = "Ressources éducatives affichées.";
-        }
-
-        function showStressManagementTools() {
-            document.getElementById('stress-management-tools-info').textContent = "Outils de gestion du stress affichés.";
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            translatePage(); // Initial translation based on the default language
+        });
     </script>
 </body>
 </html>
