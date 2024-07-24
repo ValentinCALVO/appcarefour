@@ -473,6 +473,48 @@
         margin: 5px 0; /* Espacement vertical entre les liens */
     }
 }
+.carousel-container {
+            width: 600px; /* Largeur du conteneur */
+            height: 400px; /* Hauteur du conteneur */
+            overflow: hidden; /* Masquer tout débordement */
+            border: 1px solid #ccc; /* Bordure pour visualiser le conteneur */
+            margin: auto; /* Centrer horizontalement */
+            position: relative; /* Pour positionner les éléments */
+        }
+
+        .carousel-slide {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Adapter l'image sans déformation */
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .carousel-nav button {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .carousel-nav button.active {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -520,8 +562,20 @@
     <div class="container">
         <!-- Suivi de la Santé et du Bien-Être -->
         <div class="section card">
-            <h2 data-key="health_wellness">Suivi de la Santé et du Bien-Être</h2>
-            <p data-key="health_wellness_desc">Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.</p>
+            <h2 data-key="health_wellness">Les programmes sportifs du moment</h2>
+            <p data-key="health_wellness_desc" align="justify">Ici nous célébrons le sport sous toutes ses formes et pour tous les âges ! Ici, nous mettons en lumière des événements sportifs et des initiatives qui transcendent les générations et les cultures, réunissant des participants de tous horizons. Que vous soyez jeune ou moins jeune, amateur ou professionnel, nous vous invitons à découvrir comment le sport peut être un formidable vecteur de partage, de compréhension et de solidarité. Suivez-nous pour rester informé des activités sportives locales et internationales qui promeuvent l'inclusion et la diversité, et trouvez des occasions de vous engager dans des programmes qui rassemblent les communautés à travers le sport.</p>
+               <div class="carousel-container">
+        <div class="carousel-slide">
+            <img src="/PS1.png" alt="Image 1">
+            <img src="/PS2.png" alt="Image 2">
+            <img src="/PS3.png" alt="Image 3">
+        </div>
+        <div class="carousel-nav">
+            <button class="nav-btn" data-index="0"></button>
+            <button class="nav-btn" data-index="1"></button>
+            <button class="nav-btn" data-index="2"></button>
+        </div>
+    </div>
         </div>
         <!-- Programmes de Formation -->
         <div class="section card">
@@ -582,8 +636,8 @@
     const translations = {
     fr: {
         title: "Care'Four : Votre application bien-être",
-        health_wellness: "Suivi de la Santé et du Bien-Être",
-        health_wellness_desc: "Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.",
+        health_wellness: "Les programmes sportifs du moment",
+        health_wellness_desc: "Ici nous célébrons le sport sous toutes ses formes et pour tous les âges ! Ici, nous mettons en lumière des événements sportifs et des initiatives qui transcendent les générations et les cultures, réunissant des participants de tous horizons. Que vous soyez jeune ou moins jeune, amateur ou professionnel, nous vous invitons à découvrir comment le sport peut être un formidable vecteur de partage, de compréhension et de solidarité. Suivez-nous pour rester informé des activités sportives locales et internationales qui promeuvent l'inclusion et la diversité, et trouvez des occasions de vous engager dans des programmes qui rassemblent les communautés à travers le sport.",
         training_programs: "Programmes de Formation",
         training_programs_desc: "Accédez à des formations adaptées pour votre développement personnel et professionnel.",
         performance_tracking: "Suivi de Performance",
@@ -631,8 +685,8 @@
     },
     pt: {
         title: "Care'Four: Seu aplicativo de bem-estar",
-        health_wellness: "Monitoramento de Saúde e Bem-Estar",
-        health_wellness_desc: "Receba conselhos personalizados para melhorar seu bem-estar diário.",
+        health_wellness: "Programas esportivos do momento",
+        health_wellness_desc: "Bem-vindo à nossa seção “Programas Esportivos do Momento”, onde celebramos o esporte em todas as suas formas e para todas as idades! Aqui destacamos eventos e iniciativas esportivas que transcendem gerações e culturas, reunindo participantes de todas as esferas da vida. Seja você jovem ou idoso, amador ou profissional, nós o convidamos a descobrir como o esporte pode ser um veículo maravilhoso para o compartilhamento, a compreensão e a solidariedade. Siga-nos para se manter atualizado sobre as atividades esportivas locais e internacionais que promovem a inclusão e a diversidade, e encontre oportunidades de se envolver em programas que unem as comunidades por meio do esporte.",
         training_programs: "Programas de Treinamento",
         training_programs_desc: "Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.",
         performance_tracking: "Monitoramento de Desempenho",
@@ -775,6 +829,44 @@
         function showInfo() {
     alert(translations[currentLanguage]['info_message']);
 }
+ const slide = document.querySelector('.carousel-slide');
+        const images = document.querySelectorAll('.carousel-slide img');
+        const navButtons = document.querySelectorAll('.nav-btn');
+
+        let counter = 0;
+        const size = document.querySelector('.carousel-container').clientWidth;
+
+        function updateCarousel() {
+            slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            navButtons[counter].classList.add('active');
+        }
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                counter = parseInt(button.dataset.index);
+                updateCarousel();
+            });
+        });
+
+        function autoSlide() {
+            counter++;
+            if (counter >= images.length) counter = 0;
+            updateCarousel();
+        }
+
+        let autoSlideInterval = setInterval(autoSlide, 3000);
+
+        document.querySelector('.carousel-container').addEventListener('mouseover', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        document.querySelector('.carousel-container').addEventListener('mouseout', () => {
+            autoSlideInterval = setInterval(autoSlide, 3000);
+        });
+
+        // Initial update to set the first button active
+        updateCarousel();
     </script>
 </body>
 </html>
