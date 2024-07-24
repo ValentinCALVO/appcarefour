@@ -141,20 +141,50 @@
         button:hover {
             background-color: #0056b3;
         }
-        .footer {
-            background-color: rgba(0, 123, 255, 0.9);
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-        }
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
+       .footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border-top: 1px solid #0056b3;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #cce5ff;
+}
+
         .section {
             margin: 20px 0;
         }
@@ -353,9 +383,27 @@
             <p data-key="support_assistance_desc">Obtenez de l'aide rapidement grâce à notre support dédié.</p>
         </div>
     </div>
-    <div class="footer">
-        <p>&copy; 2024 Care'Four. Tous droits réservés. <a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>
+      <div class="footer">
+    <div class="footer-content">
+        <p><strong data-key="footer_title"></strong> <span data-key="footer_names"></span></p>
+        <p><a href="#" data-key="footer_privacy"></a> | <a href="#" data-key="footer_terms"></a></p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
     </div>
+</div>
+
     <!-- Chatbot -->
     <div class="chatbot" onclick="toggleChatbot()">
         <i class="fas fa-comments"></i>
@@ -375,48 +423,87 @@
     <script>
         let currentLanguage = 'fr';
 
-        const translations = {
-            fr: {
-                title: "Care'Four : Votre application bien-être",
-                health_wellness: "Suivi de la Santé et du Bien-Être",
-                health_wellness_desc: "Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.",
-                training_programs: "Programmes de Formation",
-                training_programs_desc: "Accédez à des formations adaptées pour votre développement personnel et professionnel.",
-                performance_tracking: "Suivi de Performance",
-                performance_tracking_desc: "Évaluez vos performances avec des outils de suivi avancés.",
-                support_assistance: "Assistance et Support",
-                support_assistance_desc: "Obtenez de l'aide rapidement grâce à notre support dédié.",
-                email_placeholder: "Adresse e-mail",
-                password_placeholder: "Mot de passe",
-                login_button: "Connexion",
-                register_button: "Inscription",
-                beta_button: "Télécharger la version mobile",
-                chatbot_title: "Chatbot",
-                typing_indicator: "Franck est en train de taper...",
-                chat_input_placeholder: "Tapez un message...",
-                send_button: "Envoyer"
-            },
-            pt: {
-                title: "Care'Four: Seu aplicativo de bem-estar",
-                health_wellness: "Monitoramento de Saúde e Bem-Estar",
-                health_wellness_desc: "Receba conselhos personalizados para melhorar seu bem-estar diário.",
-                training_programs: "Programas de Treinamento",
-                training_programs_desc: "Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.",
-                performance_tracking: "Monitoramento de Desempenho",
-                performance_tracking_desc: "Avalie seu desempenho com ferramentas avançadas de monitoramento.",
-                support_assistance: "Assistência e Suporte",
-                support_assistance_desc: "Obtenha ajuda rapidamente com nosso suporte dedicado.",
-                email_placeholder: "Endereço de email",
-                password_placeholder: "Senha",
-                login_button: "Conexão",
-                register_button: "Inscrição",
-                beta_button: "Baixar versão móvel",
-                chatbot_title: "Chatbot",
-                typing_indicator: "Franck está digitando...",
-                chat_input_placeholder: "Digite uma mensagem...",
-                send_button: "Enviar"
-            }
-        };
+    const translations = {
+    fr: {
+        title: "Care'Four : Votre application bien-être",
+        health_wellness: "Suivi de la Santé et du Bien-Être",
+        health_wellness_desc: "Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.",
+        training_programs: "Programmes de Formation",
+        training_programs_desc: "Accédez à des formations adaptées pour votre développement personnel et professionnel.",
+        performance_tracking: "Suivi de Performance",
+        performance_tracking_desc: "Évaluez vos performances avec des outils de suivi avancés.",
+        support_assistance: "Assistance et Support",
+        support_assistance_desc: "Obtenez de l'aide rapidement grâce à notre support dédié.",
+        email_placeholder: "Adresse e-mail",
+        password_placeholder: "Mot de passe",
+        login_button: "Connexion",
+        register_button: "Inscription",
+        beta_button: "Télécharger la version mobile",
+        chatbot_title: "Chatbot",
+        typing_indicator: "Franck est en train de taper...",
+        chat_input_placeholder: "Tapez un message...",
+        send_button: "Envoyer",
+        footer_title: "Template créée par :",
+        footer_names: "Nazookh NUJURALLY, Lola PETITJEAN, Flavien CEDE et Valentin CALVO",
+        footer_privacy: "Politique de confidentialité",
+        footer_terms: "Conditions d'utilisation",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        linkedin: "LinkedIn",
+        instagram: "Instagram",
+        bonjour: "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
+        aide: "Je suis là pour vous aider. Que puis-je faire pour vous ?",
+        merci: "De rien ! Si vous avez d'autres questions, n'hésitez pas.",
+        info_message: "Bienvenue sur Care'Four ! Voici quelques détails sur notre application :\n\n" +
+                      "1. **Suivi de la Santé et du Bien-Être** : Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.\n" +
+                      "2. **Programmes de Formation** : Accédez à des formations adaptées pour votre développement personnel et professionnel.\n" +
+                      "3. **Suivi de Performance** : Évaluez vos performances avec des outils de suivi avancés.\n" +
+                      "4. **Assistance et Support** : Obtenez de l'aide rapidement grâce à notre support dédié.\n\n" +
+                      "Pour profiter pleinement de ces fonctionnalités, nous vous recommandons de vous connecter ou de créer un compte. Cela vous permettra de sauvegarder vos données et de personnaliser votre expérience.",
+        default: "Je ne suis pas sûr de comprendre. Pouvez-vous reformuler ?"
+        
+    },
+    pt: {
+        title: "Care'Four: Seu aplicativo de bem-estar",
+        health_wellness: "Monitoramento de Saúde e Bem-Estar",
+        health_wellness_desc: "Receba conselhos personalizados para melhorar seu bem-estar diário.",
+        training_programs: "Programas de Treinamento",
+        training_programs_desc: "Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.",
+        performance_tracking: "Monitoramento de Desempenho",
+        performance_tracking_desc: "Avalie seu desempenho com ferramentas avançadas de monitoramento.",
+        support_assistance: "Assistência e Suporte",
+        support_assistance_desc: "Obtenha ajuda rapidamente com nosso suporte dedicado.",
+        email_placeholder: "Endereço de email",
+        password_placeholder: "Senha",
+        login_button: "Conexão",
+        register_button: "Inscrição",
+        beta_button: "Baixar versão móvel",
+        chatbot_title: "Chatbot",
+        typing_indicator: "Franck está digitando...",
+        chat_input_placeholder: "Digite uma mensagem...",
+        send_button: "Enviar",
+        footer_title: "Template criada por:",
+        footer_names: "Nazookh NUJURALLY, Lola PETITJEAN, Flavien CEDE e Valentin CALVO",
+        footer_privacy: "Política de Privacidade",
+        footer_terms: "Termos de Uso",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        linkedin: "LinkedIn",
+        instagram: "Instagram",
+        bonjour: "Olá! Como posso ajudá-lo hoje?",
+        aide: "Estou aqui para ajudar. O que posso fazer por você?",
+        merci: "De nada! Se tiver outras perguntas, não hesite em perguntar.",
+        info_message: "Bem-vindo ao Care'Four! Aqui estão alguns detalhes sobre nosso aplicativo:\n\n" +
+                      "1. **Monitoramento de Saúde e Bem-Estar** : Receba conselhos personalizados para melhorar seu bem-estar diário.\n" +
+                      "2. **Programas de Treinamento** : Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.\n" +
+                      "3. **Monitoramento de Desempenho** : Avalie seu desempenho com ferramentas avançadas de monitoramento.\n" +
+                      "4. **Assistência e Suporte** : Obtenha ajuda rapidamente com nosso suporte dedicado.\n\n" +
+                      "Para aproveitar ao máximo essas funcionalidades, recomendamos que você faça login ou crie uma conta. Isso permitirá que você salve seus dados e personalize sua experiência.",
+        default: "Não tenho certeza do que você quer dizer. Pode reformular?"
+    }
+};
+
+
 
         function changeLanguage() {
             currentLanguage = document.getElementById('language').value;
@@ -447,45 +534,46 @@
         }
 
         function sendMessage() {
-            const chatInput = document.getElementById('chatInput');
-            const messages = document.getElementById('messages');
-            const typingIndicator = document.getElementById('typingIndicator');
+    const chatInput = document.getElementById('chatInput');
+    const messages = document.getElementById('messages');
+    const typingIndicator = document.getElementById('typingIndicator');
 
-            if (chatInput.value.trim() === '') return;
+    if (chatInput.value.trim() === '') return;
 
-            const userMessage = document.createElement('div');
-            userMessage.className = 'message user';
-            userMessage.innerHTML = `
-                <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Moi">
-                <div class="bubble">${chatInput.value}</div>
-            `;
-            messages.appendChild(userMessage);
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user';
+    userMessage.innerHTML = `
+        <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Moi">
+        <div class="bubble">${chatInput.value}</div>
+    `;
+    messages.appendChild(userMessage);
 
-            const userText = chatInput.value.trim().toLowerCase();
-            chatInput.value = '';
-            typingIndicator.style.display = 'block';
+    const userText = chatInput.value.trim().toLowerCase();
+    chatInput.value = '';
+    typingIndicator.style.display = 'block';
 
-            const responses = {
-                'bonjour': translations[currentLanguage]['bonjour'],
-                'aide': translations[currentLanguage]['help'],
-                'merci': translations[currentLanguage]['thanks'],
-                'default': translations[currentLanguage]['default']
-            };
+    const responses = {
+        'bonjour': translations[currentLanguage]['bonjour'],
+        'aide': translations[currentLanguage]['aide'],
+        'merci': translations[currentLanguage]['merci'],
+        'default': translations[currentLanguage]['default']
+    };
 
-            setTimeout(() => {
-                const chatbotResponse = document.createElement('div');
-                chatbotResponse.className = 'message bot';
-                chatbotResponse.innerHTML = `
-                    <img src="https://herobot.app/wp-content/uploads/2022/11/AI-bot-1.jpg" alt="Franck">
-                    <div class="bubble">${responses[userText] || responses['default']}</div>
-                `;
-                typingIndicator.style.display = 'none';
-                messages.appendChild(chatbotResponse);
+    setTimeout(() => {
+        const chatbotResponse = document.createElement('div');
+        chatbotResponse.className = 'message bot';
+        chatbotResponse.innerHTML = `
+            <img src="https://herobot.app/wp-content/uploads/2022/11/AI-bot-1.jpg" alt="Franck">
+            <div class="bubble">${responses[userText] || responses['default']}</div>
+        `;
+        typingIndicator.style.display = 'none';
+        messages.appendChild(chatbotResponse);
 
-                // Auto-scroll to the latest message
-                messages.scrollTop = messages.scrollHeight;
-            }, 1000);
-        }
+        // Auto-scroll to the latest message
+        messages.scrollTop = messages.scrollHeight;
+    }, 1000);
+		}
+
 
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
@@ -502,6 +590,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             translatePage(); // Initial translation based on the default language
         });
+        
+        function showInfo() {
+    alert(translations[currentLanguage]['info_message']);
+}
     </script>
 </body>
 </html>
