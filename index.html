@@ -333,18 +333,163 @@
         .dark-mode-toggle i {
             margin-right: 5px;
         }
+        .top-bar form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+}
+
+.top-bar input {
+    margin-right: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+}
+
+.top-bar .info-icon {
+    font-size: 20px;
+    cursor: pointer;
+    background: #fff;
+    color: #0937A0;
+    border-radius: 50%;
+    border: 1px solid #0937A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.top-bar .beta-button {
+    cursor: pointer;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.top-bar .beta-button:hover {
+    background-color: #c70039;
+}
+
+/* Styles de la barre de recherche */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: 20px; /* Ajustez selon vos besoins */
+}
+
+.search-bar input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background-color: #007bff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* Espace entre le champ de recherche et le bouton */
+}
+
+.search-bar button i {
+    margin-right: 5px;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+/* Pour s'assurer que tout s'affiche correctement sur les petits écrans */
+@media (max-width: 768px) {
+    .top-bar form {
+        flex-direction: column; /* Mettre les éléments en colonne pour les petits écrans */
+        align-items: flex-start; /* Alignement des éléments à gauche */
+    }
+
+    .search-bar {
+        margin-left: 0; /* Enlever la marge pour les petits écrans */
+        margin-top: 10px; /* Ajouter une marge en haut pour la séparation */
+    }
+}
+/* Barre de navigation */
+.nav-bar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #0056b3;
+    border-radius: 8px; /* Bordures arrondies */
+    margin: 20px auto; /* Marge pour espacement autour */
+    max-width: 1200px; /* Largeur maximale */
+    border: 2px solid #0056b3; /* Encadré autour de la barre */
+}
+
+.nav-bar .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px; /* Espacement autour des liens */
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 0 10px; /* Espacement entre les liens */
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Barre de navigation mobile */
+@media (max-width: 768px) {
+    .nav-bar .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-bar a {
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 5px 0; /* Espacement vertical entre les liens */
+    }
+}
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <form>
-            <input type="text" placeholder="Adresse e-mail" data-key="email_placeholder">
-            <input type="password" placeholder="Mot de passe" data-key="password_placeholder">
-            <span class="info-icon" onclick="showInfo()">i</span>
-            <button type="button" data-key="login_button">Connexion</button>
-            <button type="button" onclick="register()" data-key="register_button">Inscription</button>
-        </form>
-    </div>
+   <div class="top-bar">
+    <form>
+        <input type="text" placeholder="Adresse e-mail" data-key="email_placeholder">
+        <input type="password" placeholder="Mot de passe" data-key="password_placeholder">
+        <span class="info-icon" onclick="showInfo()">i</span>
+        <button type="button" data-key="login_button">Connexion</button>
+        <button type="button" onclick="register()" data-key="register_button">Inscription</button>
+        <!-- Ajoutez la barre de recherche ici -->
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher..." data-key="search_placeholder">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
     <header>
         <div class="menu-bar">
             <img src="logo.png" alt="Logo">
@@ -360,6 +505,18 @@
         </div>
         <div class="title-oval" data-key="title">Care'Four : Votre application bien-être</div>
     </header>
+     <!-- Barre de navigation -->
+    <div class="nav-bar">
+        <div class="nav-container">
+            <a href="#" class="active">À la une</a>
+            <a href="#">Accueil</a>
+            <a href="#">Communauté</a>
+            <a href="#">Planning</a>
+            <a href="#">Ressources</a>
+            <a href="#">Santé</a>
+            <a href="#">Support</a>
+        </div>
+    </div>
     <div class="container">
         <!-- Suivi de la Santé et du Bien-Être -->
         <div class="section card">
@@ -453,12 +610,22 @@
         bonjour: "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
         aide: "Je suis là pour vous aider. Que puis-je faire pour vous ?",
         merci: "De rien ! Si vous avez d'autres questions, n'hésitez pas.",
+        santé: "Pour améliorer votre bien-être général, essayez d'adopter des habitudes saines telles qu'une alimentation équilibrée, une activité physique régulière, et des moments de relaxation. Découvrez nos articles sur le bien-être pour plus de conseils adaptés à tous les âges et cultures.",
+        stress: "Pour réduire le stress, pratiquez des techniques de relaxation comme la méditation, le yoga, ou des exercices de respiration profonde. Nos guides et vidéos sont conçus pour être accessibles et utiles à chacun, quel que soit son âge ou son origine culturelle.",
+        seniors: "Pour les seniors, il est important de maintenir une activité physique adaptée, une bonne nutrition, et des interactions sociales. Consultez nos ressources pour des conseils personnalisés.",
+        jeunes: "Les jeunes peuvent bénéficier de conseils sur la gestion du stress, les habitudes saines, et l'équilibre entre la vie sociale et les études. Explorez nos articles pour des conseils spécifiques.",
+        interculturel: "Découvrez des pratiques de bien-être provenant de différentes cultures, comme la méditation zen ou le yoga. Nos articles interculturels offrent des idées pour enrichir votre routine de bien-être.",
+        ressources: "Nous proposons divers outils et ressources pour le bien-être, y compris des guides pratiques et des applications de méditation. Explorez notre bibliothèque pour trouver ce qui vous convient.",
+        support: "Notre site est conçu pour être accessible à tous. Si vous avez besoin d'assistance ou d'options d'accessibilité, veuillez consulter notre section d'aide ou contactez-nous.",
+        inclusion: "Nous célébrons la diversité culturelle et respectons toutes les traditions. Découvrez nos articles sur le bien-être qui intègrent des perspectives culturelles variées.",
+        anxiété: "Pour soutenir votre santé mentale, explorez des conseils sur la gestion de l'anxiété, le soutien émotionnel, et les pratiques de bien-être mental. Nos ressources sont conçues pour être utiles à toutes les générations.",
         info_message: "Bienvenue sur Care'Four ! Voici quelques détails sur notre application :\n\n" +
                       "1. **Suivi de la Santé et du Bien-Être** : Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.\n" +
                       "2. **Programmes de Formation** : Accédez à des formations adaptées pour votre développement personnel et professionnel.\n" +
                       "3. **Suivi de Performance** : Évaluez vos performances avec des outils de suivi avancés.\n" +
                       "4. **Assistance et Support** : Obtenez de l'aide rapidement grâce à notre support dédié.\n\n" +
                       "Pour profiter pleinement de ces fonctionnalités, nous vous recommandons de vous connecter ou de créer un compte. Cela vous permettra de sauvegarder vos données et de personnaliser votre expérience.",
+        search_placeholder: "Rechercher...", // Ajout de la clé pour la barre de recherche
         default: "Je ne suis pas sûr de comprendre. Pouvez-vous reformuler ?"
         
     },
@@ -492,12 +659,22 @@
         bonjour: "Olá! Como posso ajudá-lo hoje?",
         aide: "Estou aqui para ajudar. O que posso fazer por você?",
         merci: "De nada! Se tiver outras perguntas, não hesite em perguntar.",
+        santé: "Para melhorar seu bem-estar geral, tente adotar hábitos saudáveis, como uma dieta balanceada, atividade física regular e tempo para relaxar. Dê uma olhada em nossos artigos sobre bem-estar para obter mais conselhos adequados a todas as idades e culturas.",
+        stress: "Para reduzir o estresse, pratique técnicas de relaxamento, como meditação, ioga ou exercícios de respiração profunda. Nossos guias e vídeos foram projetados para serem acessíveis e úteis a todos, independentemente de sua idade ou formação cultural.",
+        seniors: "Para os idosos, é importante manter uma atividade física adequada, boa nutrição e interação social. Consulte nossos recursos para obter orientação personalizada.",
+        jeunes: "Os jovens podem se beneficiar de conselhos sobre gerenciamento de estresse, hábitos saudáveis e equilíbrio entre vida social e estudos. Explore nossos artigos para obter orientações específicas.",
+        interculturel: "Descubra práticas de bem-estar de diferentes culturas, como a meditação zen ou a ioga. Nossos artigos interculturais oferecem ideias para enriquecer sua rotina de bem-estar.",
+        ressources: "Oferecemos uma variedade de ferramentas e recursos de bem-estar, incluindo guias de instruções e aplicativos de meditação. Explore nossa biblioteca para encontrar o que é certo para você.",
+        support: "Nosso site foi projetado para ser acessível a todos. Se precisar de assistência ou de opções de acessibilidade, visite nossa seção de ajuda ou entre em contato conosco.",
+        inclusion: "Celebramos a diversidade cultural e respeitamos todas as tradições. Saiba mais sobre nossos artigos de bem-estar que incorporam uma variedade de perspectivas culturais.",
+        anxiété: "Para apoiar sua saúde mental, explore dicas sobre gerenciamento de ansiedade, apoio emocional e práticas de bem-estar mental. Nossos recursos foram projetados para serem úteis a todas as gerações.",
         info_message: "Bem-vindo ao Care'Four! Aqui estão alguns detalhes sobre nosso aplicativo:\n\n" +
                       "1. **Monitoramento de Saúde e Bem-Estar** : Receba conselhos personalizados para melhorar seu bem-estar diário.\n" +
                       "2. **Programas de Treinamento** : Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.\n" +
                       "3. **Monitoramento de Desempenho** : Avalie seu desempenho com ferramentas avançadas de monitoramento.\n" +
                       "4. **Assistência e Suporte** : Obtenha ajuda rapidamente com nosso suporte dedicado.\n\n" +
                       "Para aproveitar ao máximo essas funcionalidades, recomendamos que você faça login ou crie uma conta. Isso permitirá que você salve seus dados e personalize sua experiência.",
+        search_placeholder: "Pesquisar...", // Ajout de la clé pour la barre de recherche
         default: "Não tenho certeza do que você quer dizer. Pode reformular?"
     }
 };
@@ -521,10 +698,6 @@
                 const key = element.getAttribute('data-key');
                 element.setAttribute('placeholder', translations[currentLanguage][key]);
             });
-        }
-
-        function showBetaInfo() {
-            alert('Version mobile bientôt disponible !');
         }
 
         function toggleChatbot() {
@@ -555,6 +728,15 @@
         'bonjour': translations[currentLanguage]['bonjour'],
         'aide': translations[currentLanguage]['aide'],
         'merci': translations[currentLanguage]['merci'],
+        'santé': translations[currentLanguage]['santé'],
+        'stress': translations[currentLanguage]['stress'],
+        'seniors': translations[currentLanguage]['seniors'],
+        'jeunes': translations[currentLanguage]['jeunes'],
+        'interculturel': translations[currentLanguage]['interculturel'],
+        'ressources': translations[currentLanguage]['ressources'],
+        'support': translations[currentLanguage]['support'],
+        'inclusion': translations[currentLanguage]['inclusion'],
+        'anxiété': translations[currentLanguage]['anxiété'],
         'default': translations[currentLanguage]['default']
     };
 
