@@ -572,7 +572,7 @@
      <!-- Barre de navigation -->
     <div class="nav-bar">
         <div class="nav-container">
-            <a href="/appcarefour/index.html" class="active">À la une</a>
+           <a href="/appcarefour/index.html" class="active">À la une</a>
             <a href="/appcarefour/accueil.html">Accueil</a>
             <a href="/appcarefour/equipe.html">Équipe</a>
             <a href="/appcarefour/communaute.html">Forum</a>
@@ -606,6 +606,7 @@
             <a href="#" id="carousel-link">En savoir plus</a>
         </div>
         <div class="carousel-nav">
+            <button class="nav-btn" data-index="0"></button>
             <button class="nav-btn" data-index="1"></button>
             <button class="nav-btn" data-index="2"></button>
             <button class="nav-btn" data-index="3"></button>
@@ -855,9 +856,10 @@ const slide = document.querySelector('.carousel-slide');
         const carouselLink = document.getElementById('carousel-link');
 
         const links = [
-            { url: '#', text: 'En savoir plus' },
-            { url: '#', text: 'En savoir plus' },
-            { url: '#', text: 'En savoir plus' }
+            { url: '#', text: 'En savoir plus ? Cliquez ici !' },
+            { url: '#', text: 'En savoir plus ? Cliquez ici !' },
+            { url: '#', text: 'En savoir plus ? Cliquez ici !' },
+            { url: '#', text: 'En savoir plus ? Cliquez ici !' }
         ];
 
         let counter = 0;
