@@ -489,10 +489,32 @@
             transition: transform 0.5s ease-in-out;
         }
 
+        .carousel-slide .carousel-item {
+            min-width: 100%; /* Chaque image prend toute la largeur du conteneur */
+            height: 100%;
+            position: relative;
+        }
+
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover; /* Adapter l'image sans déformation */
+        }
+
+        .carousel-banner {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Bannière sombre avec effet de transparence */
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .carousel-banner a {
+            color: white;
+            text-decoration: none;
         }
 
         .carousel-nav {
@@ -564,16 +586,29 @@
         <div class="section card">
             <h2 data-key="health_wellness">Les programmes sportifs du moment</h2>
             <p data-key="health_wellness_desc" align="justify">Ici nous célébrons le sport sous toutes ses formes et pour tous les âges ! Ici, nous mettons en lumière des événements sportifs et des initiatives qui transcendent les générations et les cultures, réunissant des participants de tous horizons. Que vous soyez jeune ou moins jeune, amateur ou professionnel, nous vous invitons à découvrir comment le sport peut être un formidable vecteur de partage, de compréhension et de solidarité. Suivez-nous pour rester informé des activités sportives locales et internationales qui promeuvent l'inclusion et la diversité, et trouvez des occasions de vous engager dans des programmes qui rassemblent les communautés à travers le sport.</p>
-               <div class="carousel-container">
+              <div class="carousel-container">
         <div class="carousel-slide">
-            <img src="https://valentincalvo.github.io/appcarefour/PS1.png" alt="Image 1">
-            <img src="https://valentincalvo.github.io/appcarefour/PS2.png" alt="Image 2">
-            <img src="https://valentincalvo.github.io/appcarefour/PS3.png" alt="Image 3">
+            <div class="carousel-item">
+                <img src="https://valentincalvo.github.io/appcarefour/PS1.png" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://valentincalvo.github.io/appcarefour/PS2.png" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://valentincalvo.github.io/appcarefour/PS3.png" alt="Image 3">
+            </div>
+            <div class="carousel-item">
+                <img src="https://valentincalvo.github.io/appcarefour/PS4.png" alt="Image 3">
+            </div>
+        </div>
+        <div class="carousel-banner">
+            <a href="#" id="carousel-link">En savoir plus</a>
         </div>
         <div class="carousel-nav">
             <button class="nav-btn" data-index="0"></button>
             <button class="nav-btn" data-index="1"></button>
             <button class="nav-btn" data-index="2"></button>
+            <button class="nav-btn" data-index="3"></button>
         </div>
     </div>
         </div>
@@ -829,9 +864,17 @@
         function showInfo() {
     alert(translations[currentLanguage]['info_message']);
 }
- const slide = document.querySelector('.carousel-slide');
-        const images = document.querySelectorAll('.carousel-slide img');
+const slide = document.querySelector('.carousel-slide');
+        const items = document.querySelectorAll('.carousel-item');
         const navButtons = document.querySelectorAll('.nav-btn');
+        const carouselLink = document.getElementById('carousel-link');
+
+        const links = [
+            { url: 'lien1.html', text: 'En savoir plus' },
+            { url: 'lien2.html', text: 'En savoir plus' },
+            { url: 'lien3.html', text: 'En savoir plus' },
+            { url: 'lien4.html', text: 'En savoir plus' }
+        ];
 
         let counter = 0;
         const size = document.querySelector('.carousel-container').clientWidth;
@@ -840,6 +883,8 @@
             slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
             navButtons.forEach(btn => btn.classList.remove('active'));
             navButtons[counter].classList.add('active');
+            carouselLink.href = links[counter].url;
+            carouselLink.textContent = links[counter].text;
         }
 
         navButtons.forEach(button => {
@@ -851,7 +896,7 @@
 
         function autoSlide() {
             counter++;
-            if (counter >= images.length) counter = 0;
+            if (counter >= items.length) counter = 0;
             updateCarousel();
         }
 
