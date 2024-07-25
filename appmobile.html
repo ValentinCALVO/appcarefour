@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrefour - Activités Culturelles Brésiliennes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #f4f4f4;
+        }
+        .header {
+            background-color: #00A037;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .menu {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .menu a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #575757;
+        }
+        .menu .icon {
+            display: none;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .schedule-section, .activity-registration-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .schedule-table, .registration-form {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .schedule-table th {
+            background-color: #00A037;
+            color: white;
+        }
+        .schedule-table td {
+            background-color: #f9f9f9;
+        }
+        .schedule-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .registration-form input, .registration-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .registration-form button {
+            background-color: #00A037;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .registration-form button:hover {
+            background-color: #007a2f;
+        }
+        footer {
+            background-color: #00A037;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .menu {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .menu a {
+                float: none;
+                display: block;
+                text-align: center;
+            }
+            .menu .icon {
+                display: block;
+                font-size: 1.5em;
+                color: #fff;
+                cursor: pointer;
+                padding: 14px;
+                text-align: center;
+                background-color: #333;
+            }
+            .header {
+                font-size: 1.2em;
+            }
+            .schedule-table th, .schedule-table td {
+                padding: 5px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Carrefour - Activités Culturelles Brésiliennes</h1>
+        <div class="toggle-switch" onclick="toggleDarkMode()">
+            <i class="fas fa-adjust"></i>
+        </div>
+    </div>
+    <div class="menu">
+        <a href="#home">Accueil</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="content">
+        <div class="schedule-section">
+            <h2>Planning des Activités</h2>
+            <table class="schedule-table">
+                <tr>
+                    <th>Horaire</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+                <tr>
+                    <td>09h00 - 10h00</td>
+                    <td>Danse Samba</td>
+                    <td>Capoeira</td>
+                    <td>Danse Samba</td>
+                    <td>Capoeira</td>
+                    <td>Danse Samba</td>
+                    <td>Concert de Bossa Nova</td>
+                    <td>Repos</td>
+                </tr>
+                <tr>
+                    <td>10h00 - 11h00</td>
+                    <td>Atelier de Cuisine Brésilienne</td>
+                    <td>Yoga Brésilien</td>
+                    <td>Atelier de Cuisine Brésilienne</td>
+                    <td>Yoga Brésilien</td>
+                    <td>Atelier de Cuisine Brésilienne</td>
+                    <td>Visite Culturelle</td>
+                    <td>Repos</td>
+                </tr>
+                <tr>
+                    <td>11h00 - 12h00</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                    <td>Exposition d'Art</td>
+                    <td>Repos</td>
+                </tr>
+                <tr>
+                    <td>14h00 - 15h00</td>
+                    <td>Écoute de Musique Brésilienne</td>
+                    <td>Écoute de Musique Brésilienne</td>
+                    <td>Écoute de Musique Brésilienne</td>
+                    <td>Écoute de Musique Brésilienne</td>
+                    <td>Écoute de Musique Brésilienne</td>
+                    <td>Festival de Folklore</td>
+                    <td>Repos</td>
+                </tr>
+            </table>
+        </div>
+        <div class="activity-registration-section">
+            <h2>Inscription aux Activités</h2>
+            <form class="registration-form" id="registrationForm">
+                <label for="name">Nom:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="activity">Choisissez une activité:</label>
+                <select id="activity" name="activity" required>
+                    <option value="samba">Danse Samba</option>
+                    <option value="capoeira">Capoeira</option>
+                    <option value="cuisine">Atelier de Cuisine Brésilienne</option>
+                    <option value="yoga">Yoga Brésilien</option>
+                    <option value="lecture">Lecture de Littérature Brésilienne</option>
+                    <option value="musique">Écoute de Musique Brésilienne</option>
+                </select>
+
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Carrefour. Tous droits réservés.
+    </footer>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Simuler l'inscription des utilisateurs
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const activity = document.getElementById('activity').value;
+
+            alert(`Inscription réussie!\nNom: ${name}\nE-mail: ${email}\nActivité choisie: ${activity}`);
+            // Ici, vous pouvez ajouter du code pour envoyer les données à un serveur
+        });
+    </script>
+</body>
+</html>
