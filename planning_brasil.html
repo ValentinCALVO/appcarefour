@@ -686,8 +686,6 @@ body {
                 <label><input type="checkbox" class="filter" data-type="sport" checked> Sport</label>
                 <label><input type="checkbox" class="filter" data-type="culture" checked> Culture</label>
                 <label><input type="checkbox" class="filter" data-type="cuisine" checked> Cuisine</label>
-                <label><input type="checkbox" class="filter" data-type="interculturel" checked> Interculturel</label>
-                <label><input type="checkbox" class="filter" data-type="intergenerationnel" checked> Intergénérationnel</label>
             </div>
             <div id="calendar"></div>
             <div id="legend">
@@ -695,8 +693,6 @@ body {
                 <div class="activity sport">Sport - Événements sportifs</div>
                 <div class="activity culture">Culture - Événements culturels</div>
                 <div class="activity cuisine">Cuisine - Ateliers de cuisine</div>
-                <div class="activity interculturel">Interculturel - Événements interculturels</div>
-                <div class="activity intergenerationnel">Intergénérationnel - Activités intergénérationnelles</div>
                 <div class="activity complete">Complète - Activités complètes</div>
             </div>
         </div>
@@ -950,14 +946,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const activities = [
         { date: '2024-08-01', type: 'sport', name: 'Match de football', time: '17:00 - 19:00', complete: false },
-        { date: '2024-08-02', type: 'interculturel', name: 'Café interculturel', time: '09:00 - 11:00', complete: false },
+        { date: '2024-08-02', type: 'interculturel', name: 'Projets artistiques collaboratifs', time: '09:00 - 11:00', complete: false },
         { date: '2024-08-05', type: 'culture', name: 'Visite de musée', time: '10:00 - 12:00', complete: false },
-        { date: '2024-08-10', type: 'cuisine', name: 'Atelier cuisine italienne', time: '14:00 - 16:00', complete: true },
-        { date: '2024-08-15', type: 'intergenerationnel', name: 'Atelier intergénérationnel', time: '13:00 - 15:00', complete: false },
+        { date: '2024-08-10', type: 'cuisine', name: 'Atelier cuisine brésilienne', time: '14:00 - 16:00', complete: true },
+        { date: '2024-08-15', type: 'intergenerationnel', name: 'Échanges de Musique et Danse', time: '13:00 - 15:00', complete: false },
         { date: '2024-08-20', type: 'sport', name: 'Séance de yoga', time: '08:00 - 09:00', complete: false },
         { date: '2024-08-22', type: 'culture', name: 'Soirée théâtre', time: '20:00 - 22:00', complete: false },
-        { date: '2024-08-25', type: 'interculturel', name: 'Débat interculturel', time: '16:00 - 18:00', complete: true },
-        { date: '2024-08-28', type: 'cuisine', name: 'Atelier pâtisserie française', time: '14:00 - 16:00', complete: false },
+        { date: '2024-08-25', type: 'interculturel', name: 'Initiation samba', time: '16:00 - 18:00', complete: true },
+        { date: '2024-08-28', type: 'cuisine', name: 'Atelier desserts brésiliens', time: '14:00 - 16:00', complete: false },
         { date: '2024-08-30', type: 'sport', name: 'Tournoi de tennis', time: '10:00 - 13:00', complete: false },
         // Ajouter plus d'activités pour les mois suivants
     ];
