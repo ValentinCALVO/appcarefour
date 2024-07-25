@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrefour - Activités Culturelles Brésiliennes</title>
+    <title>Carrefour - Application de bien-être</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -48,20 +48,21 @@
         }
         .content {
             flex: 1;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .schedule-section, .activity-registration-section {
             width: 100%;
-            max-width: 1200px;
-            margin: 20px 0;
+            max-width: 600px;
+            margin: 10px 0;
             border: 1px solid #ddd;
             background-color: #fff;
             border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
         }
         .schedule-table, .registration-form {
             width: 100%;
@@ -69,7 +70,7 @@
         }
         .schedule-table th, .schedule-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 5px;
             text-align: center;
         }
         .schedule-table th {
@@ -84,8 +85,8 @@
         }
         .registration-form input, .registration-form select {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 8px;
+            margin: 8px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
@@ -93,10 +94,10 @@
             background-color: #00A037;
             color: #fff;
             border: none;
-            padding: 10px;
+            padding: 8px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
         .registration-form button:hover {
             background-color: #007a2f;
@@ -131,82 +132,86 @@
                 font-size: 1.2em;
             }
             .schedule-table th, .schedule-table td {
+                padding: 4px;
+                font-size: 0.8em;
+            }
+            .schedule-section, .activity-registration-section {
                 padding: 5px;
-                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Carrefour - Activités Culturelles Brésiliennes</h1>
+        <h1>Les activités proposées cette semaine</h1>
         <div class="toggle-switch" onclick="toggleDarkMode()">
             <i class="fas fa-adjust"></i>
         </div>
     </div>
     <div class="menu">
-        <a href="#home">Accueil</a>
-        <a href="#about">À propos</a>
-        <a href="#contact">Contact</a>
+        <a href="#home">À la une</a>
+        <a href="#about">Accueil</a>
+        <a href="#contact">Équipe</a>
+        <a href="#contact">Forum</a>
+        <a href="#contact">Planning</a>
+        <a href="#contact">Ressources</a>
+        <a href="#contact">Santé</a>
+        <a href="#contact">Support</a>
     </div>
     <div class="content">
         <div class="schedule-section">
             <h2>Planning des Activités</h2>
             <table class="schedule-table">
                 <tr>
+                    <th>Date</th>
                     <th>Horaire</th>
-                    <th>Lundi</th>
-                    <th>Mardi</th>
-                    <th>Mercredi</th>
-                    <th>Jeudi</th>
-                    <th>Vendredi</th>
-                    <th>Samedi</th>
-                    <th>Dimanche</th>
+                    <th>Activité</th>
                 </tr>
                 <tr>
+                    <td>24 Juillet 2024</td>
                     <td>09h00 - 10h00</td>
                     <td>Danse Samba</td>
-                    <td>Capoeira</td>
-                    <td>Danse Samba</td>
-                    <td>Capoeira</td>
-                    <td>Danse Samba</td>
-                    <td>Concert de Bossa Nova</td>
-                    <td>Repos</td>
                 </tr>
                 <tr>
+                    <td>24 Juillet 2024</td>
                     <td>10h00 - 11h00</td>
                     <td>Atelier de Cuisine Brésilienne</td>
-                    <td>Yoga Brésilien</td>
-                    <td>Atelier de Cuisine Brésilienne</td>
-                    <td>Yoga Brésilien</td>
-                    <td>Atelier de Cuisine Brésilienne</td>
-                    <td>Visite Culturelle</td>
-                    <td>Repos</td>
                 </tr>
                 <tr>
+                    <td>24 Juillet 2024</td>
                     <td>11h00 - 12h00</td>
                     <td>Lecture de Littérature Brésilienne</td>
-                    <td>Lecture de Littérature Brésilienne</td>
-                    <td>Lecture de Littérature Brésilienne</td>
-                    <td>Lecture de Littérature Brésilienne</td>
-                    <td>Lecture de Littérature Brésilienne</td>
-                    <td>Exposition d'Art</td>
-                    <td>Repos</td>
                 </tr>
                 <tr>
+                    <td>24 Juillet 2024</td>
                     <td>14h00 - 15h00</td>
                     <td>Écoute de Musique Brésilienne</td>
-                    <td>Écoute de Musique Brésilienne</td>
-                    <td>Écoute de Musique Brésilienne</td>
-                    <td>Écoute de Musique Brésilienne</td>
-                    <td>Écoute de Musique Brésilienne</td>
-                    <td>Festival de Folklore</td>
-                    <td>Repos</td>
                 </tr>
+                <tr>
+                    <td>25 Juillet 2024</td>
+                    <td>09h00 - 10h00</td>
+                    <td>Capoeira</td>
+                </tr>
+                <tr>
+                    <td>25 Juillet 2024</td>
+                    <td>10h00 - 11h00</td>
+                    <td>Yoga Brésilien</td>
+                </tr>
+                <tr>
+                    <td>25 Juillet 2024</td>
+                    <td>11h00 - 12h00</td>
+                    <td>Lecture de Littérature Brésilienne</td>
+                </tr>
+                <tr>
+                    <td>25 Juillet 2024</td>
+                    <td>14h00 - 15h00</td>
+                    <td>Festival de Folklore</td>
+                </tr>
+                <!-- Ajoutez plus de lignes ici selon les besoins -->
             </table>
         </div>
         <div class="activity-registration-section">
-            <h2>Inscription aux Activités</h2>
+            <h2>Inscription aux activités</h2>
             <form class="registration-form" id="registrationForm">
                 <label for="name">Nom:</label>
                 <input type="text" id="name" name="name" required>
@@ -229,7 +234,7 @@
         </div>
     </div>
     <footer>
-        &copy; 2024 Carrefour. Tous droits réservés.
+        &copy; 2024 Care'Four. Tous droits réservés.
     </footer>
     <script>
         function toggleDarkMode() {
