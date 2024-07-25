@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrefour - Application de bien-être</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #f4f4f4;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00A037;
+            color: #fff;
+            padding: 10px;
+            position: relative;
+        }
+        .top-bar form {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .top-bar input {
+            margin-right: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+        .top-bar .info-icon {
+            font-size: 20px;
+            cursor: pointer;
+            background: #fff;
+            color: #00A037;
+            border-radius: 50%;
+            border: 1px solid #00A037;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .top-bar .beta-button {
+            cursor: pointer;
+            background-color: #ff5733;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .top-bar .beta-button:hover {
+            background-color: #c70039;
+        }
+        header {
+            background-color: #007B00;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .menu-bar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #007B00;
+            color: #fff;
+            padding: 10px;
+            align-items: center;
+        }
+        .menu-bar img {
+            height: 80px;
+        }
+        .menu-bar select {
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .title-oval {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #00A037;
+            color: #FFFF;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 10px;
+            position: absolute;
+            top: 50%;
+            left: 45%;
+            transform: translate(-50%, -50%);
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            flex: 1;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        body.dark-mode .card {
+            background: #1e1e1e;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            background-color: #007B00;
+            color: #fff;
+        }
+        button i {
+            margin-right: 5px;
+        }
+        button:hover {
+            background-color: #00B356;
+        }
+       .footer {
+    background-color: #007B00;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border-top: 1px solid #00B356;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #cce5ff;
+}
+
+        .section {
+            margin: 20px 0;
+        }
+        /* Chatbot styles */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007B00;
+            color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .chatbot-window {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        .chatbot-window header {
+            background-color: #007B00;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-window .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chatbot-window .message {
+            display: flex;
+            align-items: flex-end;
+            max-width: 80%;
+        }
+        .chatbot-window .message.bot {
+            align-self: flex-start;
+        }
+        .chatbot-window .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .chatbot-window .message img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+        .chatbot-window .message .bubble {
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chatbot-window .message.bot .bubble {
+            background-color: #e1e1e1;
+        }
+        .chatbot-window .message.user .bubble {
+            background-color: #007B00;
+            color: #fff;
+        }
+        .chatbot-window .input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .chatbot-window .input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .chatbot-window .input button {
+            padding: 10px;
+            background-color: #007B00;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .chatbot-window .input button:hover {
+            background-color: #00B356;
+        }
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+            color: #888;
+            font-style: italic;
+            font-size: 12px;
+        }
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+            }
+            .top-bar .info-icon {
+                margin-right: 0; /* Ajustez pour les petits écrans */
+            }
+            .top-bar .beta-button {
+                display: none; /* Masquer le bouton bêta sur mobile si nécessaire */
+            }
+            .title-oval {
+                font-size: 18px; /* Ajustez la taille du texte pour les petits écrans */
+            }
+        }
+        /* Bouton mode clair/sombre */
+        .dark-mode-toggle {
+            background-color: #007B00;
+            color: #fff;
+            border-radius: 5px;
+            padding: 5px 15px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+        .dark-mode-toggle:hover {
+            transform: translateY(-2px);
+        }
+        .dark-mode-toggle i {
+            margin-right: 5px;
+        }
+        .top-bar form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+}
+
+.top-bar input {
+    margin-right: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+}
+
+.top-bar .info-icon {
+    font-size: 20px;
+    cursor: pointer;
+    background: #fff;
+    color: #00A037;
+    border-radius: 50%;
+    border: 1px solid #00A037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.top-bar .beta-button {
+    cursor: pointer;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.top-bar .beta-button:hover {
+    background-color: #c70039;
+}
+
+/* Styles de la barre de recherche */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: 20px; /* Ajustez selon vos besoins */
+}
+
+.search-bar input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background-color: #007B00;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* Espace entre le champ de recherche et le bouton */
+}
+
+.search-bar button i {
+    margin-right: 5px;
+}
+
+.search-bar button:hover {
+    background-color: #00B356;
+}
+
+/* Pour s'assurer que tout s'affiche correctement sur les petits écrans */
+@media (max-width: 768px) {
+    .top-bar form {
+        flex-direction: column; /* Mettre les éléments en colonne pour les petits écrans */
+        align-items: flex-start; /* Alignement des éléments à gauche */
+    }
+
+    .search-bar {
+        margin-left: 0; /* Enlever la marge pour les petits écrans */
+        margin-top: 10px; /* Ajouter une marge en haut pour la séparation */
+    }
+}
+/* Barre de navigation */
+.nav-bar {
+    background-color: #007B00;
+    color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #00B356;
+    border-radius: 8px; /* Bordures arrondies */
+    margin: 20px auto; /* Marge pour espacement autour */
+    max-width: 1200px; /* Largeur maximale */
+    border: 2px solid #00B356; /* Encadré autour de la barre */
+}
+
+.nav-bar .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px; /* Espacement autour des liens */
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 0 10px; /* Espacement entre les liens */
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+    background-color: #00B356;
+    color: #fff;
+}
+
+/* Barre de navigation mobile */
+@media (max-width: 768px) {
+    .nav-bar .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-bar a {
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 5px 0; /* Espacement vertical entre les liens */
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.support-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 36px;
+    color: #fff;
+    background-color: #007B00;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+header .subtitle {
+    font-size: 16px;
+    color: #fff;
+    background-color: #007B00;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+main {
+    padding: 0 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    border-bottom: 2px solid #007B00;
+    padding-bottom: 10px;
+    color: #007B00;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    width: 100%;
+    text-align: left;
+    background-color: #007B00;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact li {
+    margin-bottom: 10px;
+}
+
+.request-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.request-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.request-form input, .request-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.request-form button {
+    background-color: #007B00;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.request-form button:hover {
+    background-color: #00B356;
+}
+
+#form-response {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #007B00;
+}
+    </style>
+</head>
+<body>
+   <div class="top-bar">
+    <form>
+        <input type="text" placeholder="Adresse e-mail" data-key="email_placeholder">
+        <input type="password" placeholder="Mot de passe" data-key="password_placeholder">
+        <span class="info-icon" onclick="showInfo()">i</span>
+        <button type="button" data-key="login_button">Connexion</button>
+        <button type="button" onclick="register()" data-key="register_button">Inscription</button>
+        <!-- Ajoutez la barre de recherche ici -->
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher..." data-key="search_placeholder">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
+    <header>
+        <div class="menu-bar">
+            <img src="logobrasil.png" alt="Logo">
+            <div>
+                <select id="language" onchange="changeLanguage()">
+                    <option value="fr">Français</option>
+                    <option value="pt">Português</option>
+                </select>
+                <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-sun"></i> Mode clair / sombre
+                </div>
+            </div>
+        </div>
+        <div class="title-oval" data-key="title">Care'Four : Votre application bien-être</div>
+    </header>
+     <!-- Barre de navigation -->
+    <div class="nav-bar">
+        <div class="nav-container">
+            <a href="/appcarefour/index_brasil.html">À la une</a>
+            <a href="/appcarefour/accueil_brasil.html">Accueil</a>
+            <a href="/appcarefour/equipe_brasil.html">Équipe</a>
+            <a href="/appcarefour/communaute_brasil.html">Forum</a>
+            <a href="/appcarefour/planning_brasil.html">Planning</a>
+            <a href="/appcarefour/ressources_brasil.html">Ressources</a>
+            <a href="/appcarefour/sante_brasil.html">Santé</a>
+            <a href="/appcarefour/support_brasil.html" class="active">Support</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section card">
+           <div class="support-container">
+        <header>
+            <h1>Support et assistance</h1>
+            <p class="subtitle">Nous sommes là pour vous aider. Trouvez des réponses à vos questions ou contactez-nous pour plus d'assistance.</p>
+        </header>
+        <main>
+            <section class="faq">
+                <h2>Questions fréquemment posées</h2>
+                <div class="faq-item">
+                    <button class="faq-question">Comment réinitialiser mon mot de passe ?</button>
+                    <div class="faq-answer">
+                        <p>Pour réinitialiser votre mot de passe, allez dans les paramètres de votre compte et cliquez sur "Réinitialiser le mot de passe". Suivez les instructions envoyées à votre adresse e-mail.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Comment puis-je mettre à jour mes informations personnelles ?</button>
+                    <div class="faq-answer">
+                        <p>Connectez-vous à votre compte, allez dans "Profil" et cliquez sur "Modifier mes informations". Vous pourrez alors mettre à jour vos informations personnelles.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Que faire si je rencontre un problème technique ?</button>
+                    <div class="faq-answer">
+                        <p>Si vous rencontrez un problème technique, veuillez vérifier notre section de dépannage. Si le problème persiste, contactez notre support technique via le formulaire ci-dessous.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="contact">
+                <h2>Nous contacter</h2>
+                <p>Vous avez une question ou un problème ? Contactez-nous via les moyens suivants :</p>
+                <ul>
+                    <li><strong>Email :</strong> appcarefour@support.carrefour.br</li>
+                    <li><strong>Téléphone :</strong> +55 11 98765-4321</li>
+                    <li><strong>Adresse :</strong> Rua do Exemplo, 456, São Paulo, SP, Brésil</li>
+                </ul>
+            </section>
+            <section class="request-form">
+                <h2>Formulaire de demande d'assistance</h2>
+                <form id="support-form">
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="subject">Sujet :</label>
+                    <input type="text" id="subject" name="subject" required>
+                    
+                    <label for="message">Message :</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                    
+                    <button type="submit">Envoyer la demande</button>
+                </form>
+                <div id="form-response"></div>
+            </section>
+        </main>
+    </div>
+           </div>
+    </div>
+      <div class="footer">
+    <div class="footer-content">
+        <p><strong data-key="footer_title"></strong> <span data-key="footer_names"></span></p>
+        <p><a href="/appcarefour/politiqueconfidentialite_brasil.html" data-key="footer_privacy"></a> | <a href="/appcarefour/conditionsutilisation_brasil.html" data-key="footer_terms"></a></p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+    <!-- Chatbot -->
+    <div class="chatbot" onclick="toggleChatbot()">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-window" id="chatbotWindow">
+        <header>
+            <span data-key="chatbot_title">Chatbot</span>
+            <button onclick="toggleChatbot()">X</button>
+        </header>
+        <div class="messages" id="messages"></div>
+        <div class="typing-indicator" id="typingIndicator" data-key="typing_indicator">Franck est en train de taper...</div>
+        <div class="input">
+            <input type="text" id="chatInput" placeholder="Tapez un message..." data-key="chat_input_placeholder">
+            <button onclick="sendMessage()" data-key="send_button">Envoyer</button>
+        </div>
+    </div>
+    <script>
+        let currentLanguage = 'fr';
+
+    const translations = {
+    fr: {
+        title: "Care'Four : Votre application bien-être",
+        health_wellness: "Les programmes à la une",
+        health_wellness_desc: "Bienvenue sur la page à la une ! Ici, vous trouverez les dernières nouveautés et les programmes les plus en vogue. Nous avons regroupé les meilleures offres, les sessions à ne pas manquer et les actualités essentielles. Explorez notre sélection exclusive et restez informé des tendances pour maximiser votre expérience !",
+        training_programs: "Programmes de Formation",
+        training_programs_desc: "Accédez à des formations adaptées pour votre développement personnel et professionnel.",
+        performance_tracking: "Suivi de Performance",
+        performance_tracking_desc: "Évaluez vos performances avec des outils de suivi avancés.",
+        support_assistance: "Assistance et Support",
+        support_assistance_desc: "Obtenez de l'aide rapidement grâce à notre support dédié.",
+        email_placeholder: "Adresse e-mail",
+        password_placeholder: "Mot de passe",
+        login_button: "Connexion",
+        register_button: "Inscription",
+        beta_button: "Télécharger la version mobile",
+        chatbot_title: "Chatbot",
+        typing_indicator: "Franck est en train de taper...",
+        chat_input_placeholder: "Tapez un message...",
+        send_button: "Envoyer",
+        footer_title: "Template créée par :",
+        footer_names: "Nazookh NUJURALLY, Lola PETITJEAN, Flavien CEDE et Valentin CALVO",
+        footer_privacy: "Politique de confidentialité",
+        footer_terms: "Conditions d'utilisation",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        linkedin: "LinkedIn",
+        instagram: "Instagram",
+        bonjour: "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
+        aide: "Je suis là pour vous aider. Que puis-je faire pour vous ?",
+        merci: "De rien ! Si vous avez d'autres questions, n'hésitez pas.",
+        santé: "Pour améliorer votre bien-être général, essayez d'adopter des habitudes saines telles qu'une alimentation équilibrée, une activité physique régulière, et des moments de relaxation. Découvrez nos articles sur le bien-être pour plus de conseils adaptés à tous les âges et cultures.",
+        stress: "Pour réduire le stress, pratiquez des techniques de relaxation comme la méditation, le yoga, ou des exercices de respiration profonde. Nos guides et vidéos sont conçus pour être accessibles et utiles à chacun, quel que soit son âge ou son origine culturelle.",
+        seniors: "Pour les seniors, il est important de maintenir une activité physique adaptée, une bonne nutrition, et des interactions sociales. Consultez nos ressources pour des conseils personnalisés.",
+        jeunes: "Les jeunes peuvent bénéficier de conseils sur la gestion du stress, les habitudes saines, et l'équilibre entre la vie sociale et les études. Explorez nos articles pour des conseils spécifiques.",
+        interculturel: "Découvrez des pratiques de bien-être provenant de différentes cultures, comme la méditation zen ou le yoga. Nos articles interculturels offrent des idées pour enrichir votre routine de bien-être.",
+        ressources: "Nous proposons divers outils et ressources pour le bien-être, y compris des guides pratiques et des applications de méditation. Explorez notre bibliothèque pour trouver ce qui vous convient.",
+        support: "Notre site est conçu pour être accessible à tous. Si vous avez besoin d'assistance ou d'options d'accessibilité, veuillez consulter notre section d'aide ou contactez-nous.",
+        inclusion: "Nous célébrons la diversité culturelle et respectons toutes les traditions. Découvrez nos articles sur le bien-être qui intègrent des perspectives culturelles variées.",
+        anxiété: "Pour soutenir votre santé mentale, explorez des conseils sur la gestion de l'anxiété, le soutien émotionnel, et les pratiques de bien-être mental. Nos ressources sont conçues pour être utiles à toutes les générations.",
+        info_message: "Bienvenue sur Care'Four ! Voici quelques détails sur notre application :\n\n" +
+                      "1. **Suivi de la Santé et du Bien-Être** : Recevez des conseils personnalisés pour améliorer votre bien-être quotidien.\n" +
+                      "2. **Programmes de Formation** : Accédez à des formations adaptées pour votre développement personnel et professionnel.\n" +
+                      "3. **Suivi de Performance** : Évaluez vos performances avec des outils de suivi avancés.\n" +
+                      "4. **Assistance et Support** : Obtenez de l'aide rapidement grâce à notre support dédié.\n\n" +
+                      "Pour profiter pleinement de ces fonctionnalités, nous vous recommandons de vous connecter ou de créer un compte. Cela vous permettra de sauvegarder vos données et de personnaliser votre expérience.",
+        search_placeholder: "Rechercher...", // Ajout de la clé pour la barre de recherche
+        default: "Je ne suis pas sûr de comprendre. Pouvez-vous reformuler ?"
+        
+    },
+    pt: {
+        title: "Care'Four: Seu aplicativo de bem-estar",
+        health_wellness: "Programas em destaque",
+        health_wellness_desc: "BBem-vindo à nossa página inicial! Aqui você encontrará as últimas notícias e os programas mais badalados. Reunimos as melhores ofertas, sessões imperdíveis e notícias essenciais. Explore nossa seleção exclusiva e mantenha-se atualizado com as últimas tendências para maximizar sua experiência!",
+        training_programs: "Programas de Treinamento",
+        training_programs_desc: "Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.",
+        performance_tracking: "Monitoramento de Desempenho",
+        performance_tracking_desc: "Avalie seu desempenho com ferramentas avançadas de monitoramento.",
+        support_assistance: "Assistência e Suporte",
+        support_assistance_desc: "Obtenha ajuda rapidamente com nosso suporte dedicado.",
+        email_placeholder: "Endereço de email",
+        password_placeholder: "Senha",
+        login_button: "Conexão",
+        register_button: "Inscrição",
+        beta_button: "Baixar versão móvel",
+        chatbot_title: "Chatbot",
+        typing_indicator: "Franck está digitando...",
+        chat_input_placeholder: "Digite uma mensagem...",
+        send_button: "Enviar",
+        footer_title: "Template criada por:",
+        footer_names: "Nazookh NUJURALLY, Lola PETITJEAN, Flavien CEDE e Valentin CALVO",
+        footer_privacy: "Política de Privacidade",
+        footer_terms: "Termos de Uso",
+        facebook: "Facebook",
+        twitter: "Twitter",
+        linkedin: "LinkedIn",
+        instagram: "Instagram",
+        bonjour: "Olá! Como posso ajudá-lo hoje?",
+        aide: "Estou aqui para ajudar. O que posso fazer por você?",
+        merci: "De nada! Se tiver outras perguntas, não hesite em perguntar.",
+        santé: "Para melhorar seu bem-estar geral, tente adotar hábitos saudáveis, como uma dieta balanceada, atividade física regular e tempo para relaxar. Dê uma olhada em nossos artigos sobre bem-estar para obter mais conselhos adequados a todas as idades e culturas.",
+        stress: "Para reduzir o estresse, pratique técnicas de relaxamento, como meditação, ioga ou exercícios de respiração profunda. Nossos guias e vídeos foram projetados para serem acessíveis e úteis a todos, independentemente de sua idade ou formação cultural.",
+        seniors: "Para os idosos, é importante manter uma atividade física adequada, boa nutrição e interação social. Consulte nossos recursos para obter orientação personalizada.",
+        jeunes: "Os jovens podem se beneficiar de conselhos sobre gerenciamento de estresse, hábitos saudáveis e equilíbrio entre vida social e estudos. Explore nossos artigos para obter orientações específicas.",
+        interculturel: "Descubra práticas de bem-estar de diferentes culturas, como a meditação zen ou a ioga. Nossos artigos interculturais oferecem ideias para enriquecer sua rotina de bem-estar.",
+        ressources: "Oferecemos uma variedade de ferramentas e recursos de bem-estar, incluindo guias de instruções e aplicativos de meditação. Explore nossa biblioteca para encontrar o que é certo para você.",
+        support: "Nosso site foi projetado para ser acessível a todos. Se precisar de assistência ou de opções de acessibilidade, visite nossa seção de ajuda ou entre em contato conosco.",
+        inclusion: "Celebramos a diversidade cultural e respeitamos todas as tradições. Saiba mais sobre nossos artigos de bem-estar que incorporam uma variedade de perspectivas culturais.",
+        anxiété: "Para apoiar sua saúde mental, explore dicas sobre gerenciamento de ansiedade, apoio emocional e práticas de bem-estar mental. Nossos recursos foram projetados para serem úteis a todas as gerações.",
+        info_message: "Bem-vindo ao Care'Four! Aqui estão alguns detalhes sobre nosso aplicativo:\n\n" +
+                      "1. **Monitoramento de Saúde e Bem-Estar** : Receba conselhos personalizados para melhorar seu bem-estar diário.\n" +
+                      "2. **Programas de Treinamento** : Acesse treinamentos adaptados para seu desenvolvimento pessoal e profissional.\n" +
+                      "3. **Monitoramento de Desempenho** : Avalie seu desempenho com ferramentas avançadas de monitoramento.\n" +
+                      "4. **Assistência e Suporte** : Obtenha ajuda rapidamente com nosso suporte dedicado.\n\n" +
+                      "Para aproveitar ao máximo essas funcionalidades, recomendamos que você faça login ou crie uma conta. Isso permitirá que você salve seus dados e personalize sua experiência.",
+        search_placeholder: "Pesquisar...", // Ajout de la clé pour la barre de recherche
+        default: "Não tenho certeza do que você quer dizer. Pode reformular?"
+    }
+};
+
+
+
+        function changeLanguage() {
+            currentLanguage = document.getElementById('language').value;
+            translatePage();
+        }
+
+        function translatePage() {
+            const elementsToTranslate = document.querySelectorAll('[data-key]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.textContent = translations[currentLanguage][key];
+            });
+
+            const placeholdersToTranslate = document.querySelectorAll('input[data-key]');
+            placeholdersToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.setAttribute('placeholder', translations[currentLanguage][key]);
+            });
+        }
+
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotWindow.style.display = (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') ? 'flex' : 'none';
+        }
+
+        function sendMessage() {
+    const chatInput = document.getElementById('chatInput');
+    const messages = document.getElementById('messages');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    if (chatInput.value.trim() === '') return;
+
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user';
+    userMessage.innerHTML = `
+        <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Moi">
+        <div class="bubble">${chatInput.value}</div>
+    `;
+    messages.appendChild(userMessage);
+
+    const userText = chatInput.value.trim().toLowerCase();
+    chatInput.value = '';
+    typingIndicator.style.display = 'block';
+
+    const responses = {
+        'bonjour': translations[currentLanguage]['bonjour'],
+        'aide': translations[currentLanguage]['aide'],
+        'merci': translations[currentLanguage]['merci'],
+        'santé': translations[currentLanguage]['santé'],
+        'stress': translations[currentLanguage]['stress'],
+        'seniors': translations[currentLanguage]['seniors'],
+        'jeunes': translations[currentLanguage]['jeunes'],
+        'interculturel': translations[currentLanguage]['interculturel'],
+        'ressources': translations[currentLanguage]['ressources'],
+        'support': translations[currentLanguage]['support'],
+        'inclusion': translations[currentLanguage]['inclusion'],
+        'anxiété': translations[currentLanguage]['anxiété'],
+        'default': translations[currentLanguage]['default']
+    };
+
+    setTimeout(() => {
+        const chatbotResponse = document.createElement('div');
+        chatbotResponse.className = 'message bot';
+        chatbotResponse.innerHTML = `
+            <img src="https://herobot.app/wp-content/uploads/2022/11/AI-bot-1.jpg" alt="Franck">
+            <div class="bubble">${responses[userText] || responses['default']}</div>
+        `;
+        typingIndicator.style.display = 'none';
+        messages.appendChild(chatbotResponse);
+
+        // Auto-scroll to the latest message
+        messages.scrollTop = messages.scrollHeight;
+    }, 1000);
+		}
+
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const toggleIcon = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleIcon.classList.remove('fa-sun');
+                toggleIcon.classList.add('fa-moon');
+            } else {
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            translatePage(); // Initial translation based on the default language
+        });
+        
+        function showInfo() {
+    alert(translations[currentLanguage]['info_message']);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+
+    const form = document.getElementById('support-form');
+    const responseDiv = document.getElementById('form-response');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        // Simulating form submission and response handling
+        responseDiv.textContent = 'Votre demande a été envoyée. Nous vous contacterons sous peu.';
+        responseDiv.style.color = '#28a745'; // Green for success
+
+        // Clear the form
+        form.reset();
+    });
+});
+
+    </script>
+</body>
+</html>
